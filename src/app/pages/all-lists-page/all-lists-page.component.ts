@@ -1,24 +1,20 @@
-import { Component, inject, input } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IList, ListService } from '@shared';
 import { ListStateService } from '../../shared/services/list-state.service';
-
 import { ListFormComponent } from '../../shared/components/list-form/list-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+
 @Component({
-  selector: 'app-list-page',
+  selector: 'app-all-lists-page',
   imports: [MatButtonModule, MatDialogModule, MatIconModule],
-  templateUrl: './list-page.component.html',
-  styleUrl: './list-page.component.scss',
+  templateUrl: './all-lists-page.component.html',
+  styleUrl: './all-lists-page.component.scss',
 })
-export class ListPageComponent {
-  listId = input.required<string>();
-  title = input<string>('');
-  isMain = input<boolean>(false);
-  list: IList[] = [];
+export class AllListsPageComponent {
+  lists: IList[] = [];
 
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
@@ -31,12 +27,12 @@ export class ListPageComponent {
 
   getLists(): void {
     this.listService.getAllLists().subscribe((resp) => {
-      this.list = resp;
+      this.lists = resp;
     });
   }
 
-  viewCardList(cardId: string | null): void {
-    this.router.navigate(['/list', cardId]);
+  viewCardList(listId: string | null): void {
+    this.router.navigate(['/list', listId]);
   }
 
   addList(): void {
