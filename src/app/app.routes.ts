@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { MainListPageComponent } from './pages/main-list-page/main-list-page.component';
+import { DailyTasksPageComponent } from './pages/daily-tasks-page/daily-tasks-page.component';
 import { CompletedListPageComponent } from './pages/completed-list-page/completed-list-page.component';
-import { ListPageComponent } from './pages/list-page/list-page.component';
+import { AllListsPageComponent } from './pages/all-lists-page/all-lists-page.component';
 import { CardListComponent } from '@shared';
+import { SingleListPageComponent } from './pages/single-list-page/single-list-page.component';
 
 export const routes: Routes = [
   // {
@@ -15,11 +16,11 @@ export const routes: Routes = [
   },
   {
     path: 'list',
-    component: ListPageComponent,
+    component: AllListsPageComponent,
   },
   {
     path: 'list/:id',
-    component: CardListComponent,
+    component: SingleListPageComponent,
   },
   {
     path: '',
