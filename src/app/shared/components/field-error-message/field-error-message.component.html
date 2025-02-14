@@ -1,0 +1,7 @@
+@if (field()?.touched) {
+<div class="relative">
+  <div class="message">
+    @if (field()?.errors?.['required']) { Field is required } @else {}
+  </div>
+</div>
+}
