@@ -8,17 +8,27 @@ import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskService } from '../../services';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-card-item',
   standalone: true,
-  imports: [MatCardModule, DatePipe, MatDialogModule, MatButton, MatIconModule],
+  imports: [
+    MatCardModule,
+    DatePipe,
+    MatDialogModule,
+    MatButton,
+    MatIconModule,
+    MatCheckboxModule,
+  ],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
   data = input.required<ITask>();
   @Output() listUpdated = new EventEmitter<ITask[]>();
+  private readonly notificationService = inject(NotificationService);
 
   readonly dialog = inject(MatDialog);
   taskService = inject(TaskService);
@@ -45,23 +55,36 @@ export class CardItemComponent {
       this.taskService.deleteTaskById(cardId).subscribe({
         next: (res) => {
           if ('error' in res) {
-            this.showNotification(
+            this.notificationService.show(
               'An error occurred. Please try again!',
               'error'
             );
           } else {
-            this.showNotification('Card Deleted successfully!', 'success');
+            this.notificationService.show(
+              'Card Deleted successfully!',
+              'success'
+            );
             this.listUpdated.emit();
           }
         },
       });
     }
   }
-
-  private showNotification(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error',
-    });
+  toggleDone(isChecked: boolean): void {
+    this.taskService
+      .updateTaskById(this.data()?._id ?? '', { done: isChecked })
+      .subscribe({
+        next: (res) => {
+          if ('error' in res) {
+            this.notificationService.show(
+              'An error occurred. Please try again!',
+              'error'
+            );
+          } else {
+            this.notificationService.show('Task Done!', 'success');
+            this.listUpdated.emit();
+          }
+        },
+      });
   }
 }
