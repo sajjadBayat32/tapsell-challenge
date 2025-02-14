@@ -13,7 +13,8 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { IForm, FieldErrorMessageComponent, IList, ListService } from '@shared';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../services/notification.service';
+
 @Component({
   selector: 'app-list-form',
   imports: [
@@ -31,8 +32,8 @@ export class ListFormComponent {
   isEditMode = false;
 
   private readonly listService = inject(ListService);
+  private readonly notificationService = inject(NotificationService);
   dialogRef = inject(MatDialogRef<ListFormComponent>);
-  private readonly snackBar = inject(MatSnackBar);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { title?: string; listId?: string }
@@ -49,9 +50,12 @@ export class ListFormComponent {
       this.listService.updateListById(this.data.listId, formValue).subscribe({
         next: (res) => {
           if ('error' in res) {
-            this.showNotification('Update failed!', 'error');
+            this.notificationService.show('Update failed!', 'error');
           } else {
-            this.showNotification('List updated successfully!', 'success');
+            this.notificationService.show(
+              'List updated successfully!',
+              'success'
+            );
             this.dialogRef.close({ reload: true });
           }
         },
@@ -60,12 +64,15 @@ export class ListFormComponent {
       this.listService.InsertList(formValue).subscribe({
         next: (res) => {
           if ('error' in res) {
-            this.showNotification(
+            this.notificationService.show(
               res.message.message || 'An error occurred!',
               'error'
             );
           } else {
-            this.showNotification('List added successfully!', 'success');
+            this.notificationService.show(
+              'List added successfully!',
+              'success'
+            );
             this.dialogRef.close({ reload: true });
           }
         },
@@ -76,13 +83,6 @@ export class ListFormComponent {
   onCancel() {
     this.form.reset();
     this.dialogRef.close({ reload: false });
-  }
-
-  private showNotification(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error',
-    });
   }
 }
 

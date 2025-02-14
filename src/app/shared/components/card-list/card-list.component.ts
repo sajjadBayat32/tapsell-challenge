@@ -1,11 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  inject,
-  input,
-  OnInit,
-  TemplateRef,
-} from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { ITask } from '../../models';
 import { CardItemComponent } from '../card-item/card-item.component';
 import {
@@ -21,7 +14,7 @@ import { ListService, TaskService } from '../../services';
 import { MatIconModule } from '@angular/material/icon';
 import { ListFormComponent } from '../list-form/list-form.component';
 import { ListStateService } from '../../services/list-state.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-card-list',
@@ -45,7 +38,7 @@ export class CardListComponent implements OnInit {
   private readonly taskService = inject(TaskService);
   private readonly listService = inject(ListService);
   private readonly listStateService = inject(ListStateService);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notificationService = inject(NotificationService);
 
   ngOnInit(): void {
     this.getCardList();
@@ -98,22 +91,19 @@ export class CardListComponent implements OnInit {
       this.listService.deleteListById(this.listId()).subscribe({
         next: (res) => {
           if ('error' in res) {
-            this.showNotification(
+            this.notificationService.show(
               'An error occurred. Please try again!',
               'error'
             );
           } else {
-            this.showNotification('List Deleted successfully!', 'success');
+            this.notificationService.show(
+              'List Deleted successfully!',
+              'success'
+            );
             this.listStateService.setListState = true;
           }
         },
       });
     }
-  }
-  private showNotification(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error',
-    });
   }
 }

@@ -10,7 +10,7 @@ import { Component, Inject, inject, input } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IForm, ITask, FieldErrorMessageComponent, TaskService } from '@shared';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-card-form',
@@ -32,7 +32,7 @@ export class CardFormComponent {
 
   taskService = inject(TaskService);
   dialogRef = inject(MatDialogRef<CardFormComponent>);
-  snackBar = inject(MatSnackBar);
+  private readonly notificationService = inject(NotificationService);
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -55,12 +55,12 @@ export class CardFormComponent {
           next: (res) => {
             console.log('Update response:', res);
             if ('error' in res) {
-              this.showNotification(
+              this.notificationService.show(
                 'An error occurred. Please try again!',
                 'error'
               );
             } else {
-              this.showNotification(
+              this.notificationService.show(
                 'Card data updated successfully!',
                 'success'
               );
@@ -79,12 +79,15 @@ export class CardFormComponent {
           next: (res) => {
             console.log('Insert response:', res);
             if ('error' in res) {
-              this.showNotification(
+              this.notificationService.show(
                 'An error occurred. Please try again!',
                 'error'
               );
             } else {
-              this.showNotification('Card added successfully!', 'success');
+              this.notificationService.show(
+                'Card added successfully!',
+                'success'
+              );
               this.dialogRef.close({ reload: true });
             }
           },
@@ -95,13 +98,6 @@ export class CardFormComponent {
   onCancel() {
     this.form.reset();
     this.dialogRef.close({ reload: false });
-  }
-
-  private showNotification(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: type === 'success' ? 'snackbar-success' : 'snackbar-error',
-    });
   }
 }
 

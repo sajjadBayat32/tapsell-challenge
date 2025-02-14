@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { CardListComponent } from './shared/components/card-list/card-list.component';
+import { RouterOutlet } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ListFormComponent } from './shared/components/list-form/list-form.component';
@@ -8,8 +7,6 @@ import { IList, ListService } from '@shared';
 import { MatIconModule } from '@angular/material/icon';
 import { ListStateService } from './shared/services/list-state.service';
 import { HeaderComponent } from './shared/layout/header/header.component';
-import { DailyTasksPageComponent } from './pages/daily-tasks-page/daily-tasks-page.component';
-import { AllListsPageComponent } from './pages/all-lists-page/all-lists-page.component';
 @Component({
   selector: 'app-root',
   imports: [
@@ -18,9 +15,6 @@ import { AllListsPageComponent } from './pages/all-lists-page/all-lists-page.com
     MatDialogModule,
     MatIconModule,
     HeaderComponent,
-    CardListComponent,
-    DailyTasksPageComponent,
-    AllListsPageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
