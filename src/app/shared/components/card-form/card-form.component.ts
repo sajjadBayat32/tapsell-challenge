@@ -26,7 +26,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class CardFormComponent {
   listId: string = '';
-  task = input<BaseTask | null>(null);
+  taskId: string | null = null;
   form: FormGroup<FormType> = new FormGroup(formFields());
   formSubscription: Subscription | null = null;
 
@@ -38,22 +38,20 @@ export class CardFormComponent {
     @Inject(MAT_DIALOG_DATA)
     public taskData: any | null
   ) {
-    if (!taskData) return;
-    if ('listId' in taskData) {
-      this.listId = taskData.listId;
-    } else {
+    this.listId = taskData.list;
+    if (taskData._id) {
+      this.taskId = taskData._id;
       this.form = new FormGroup(formFields(taskData));
     }
   }
 
   onSubmit(): void {
     const { title = '', description = '' } = this.form.value;
-    if (this.taskData?._id) {
+    if (this.taskId) {
       this.taskService
-        .updateTaskById(this.taskData._id, { title, description })
+        .updateTaskById(this.taskId, { title, description })
         .subscribe({
           next: (res) => {
-            console.log('Update response:', res);
             if ('error' in res) {
               this.notificationService.show(
                 'An error occurred. Please try again!',
@@ -77,7 +75,6 @@ export class CardFormComponent {
         })
         .subscribe({
           next: (res) => {
-            console.log('Insert response:', res);
             if ('error' in res) {
               this.notificationService.show(
                 'An error occurred. Please try again!',
@@ -104,13 +101,13 @@ export class CardFormComponent {
 type BaseTask = Pick<ITask, '_id' | 'title' | 'description'>;
 type FormType = IForm<BaseTask>;
 
-function formFields(taskData: BaseTask | null = null): FormType {
+function formFields(data: BaseTask | null = null): FormType {
   return {
-    title: new FormControl(taskData?.title || '', {
+    title: new FormControl(data?.title || '', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    description: new FormControl(taskData?.description || '', {
+    description: new FormControl(data?.description || '', {
       nonNullable: true,
       validators: [],
     }),
