@@ -8,8 +8,8 @@ import { IList, ListService } from '@shared';
 import { MatIconModule } from '@angular/material/icon';
 import { ListStateService } from './shared/services/list-state.service';
 import { HeaderComponent } from './shared/layout/header/header.component';
-import { MainListPageComponent } from './pages/main-list-page/main-list-page.component';
-import { ListPageComponent } from './pages/list-page/list-page.component';
+import { DailyTasksPageComponent } from './pages/daily-tasks-page/daily-tasks-page.component';
+import { AllListsPageComponent } from './pages/all-lists-page/all-lists-page.component';
 @Component({
   selector: 'app-root',
   imports: [
@@ -19,8 +19,8 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
     MatIconModule,
     HeaderComponent,
     CardListComponent,
-    MainListPageComponent,
-    ListPageComponent,
+    DailyTasksPageComponent,
+    AllListsPageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
