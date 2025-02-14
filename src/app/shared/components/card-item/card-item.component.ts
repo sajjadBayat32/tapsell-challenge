@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskService } from '../../services';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NotificationService } from '../../services/notification.service';
 @Component({

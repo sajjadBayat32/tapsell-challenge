@@ -6,4 +6,5 @@ export interface ITask {
   date?: Date;
   done?: boolean;
   description?: string;
+  __v?: number;
 }

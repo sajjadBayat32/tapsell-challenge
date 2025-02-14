@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CompletedListPageComponent } from './pages/completed-list-page/completed-list-page.component';
+import { CompletedTasksPageComponent } from './pages/completed-tasks-page/completed-tasks-page.component';
 import { AllListsPageComponent } from './pages/all-lists-page/all-lists-page.component';
 
 import { SingleListPageComponent } from './pages/single-list-page/single-list-page.component';
@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'done',
-    component: CompletedListPageComponent,
+    component: CompletedTasksPageComponent,
   },
   {
     path: 'list',

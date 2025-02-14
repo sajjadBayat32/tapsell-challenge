@@ -38,6 +38,6 @@ export class TaskService {
   }
 
   getAllCompletedTasks() {
-    return this.baseHttp.get(environment.baseUrl + 'api/completed');
+    return this.baseHttp.get(environment.baseUrl + 'compeleted');
   }
 }

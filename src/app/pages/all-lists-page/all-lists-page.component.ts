@@ -58,7 +58,6 @@ export class AllListsPageComponent {
       data: { title: title, listId: listId },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result?.reload) {
         this.listStateService.setListState = true;
       }
