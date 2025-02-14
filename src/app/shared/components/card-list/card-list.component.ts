@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnChanges, OnInit } from '@angular/core';
 import { ITask } from '../../models';
 import { CardItemComponent } from '../card-item/card-item.component';
 import {
@@ -9,13 +9,10 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ListService, TaskService } from '../../services';
+import { TaskService } from '../../services';
 import { MatIconModule } from '@angular/material/icon';
-import { ListFormComponent } from '../list-form/list-form.component';
-import { ListStateService } from '../../services/list-state.service';
-import { NotificationService } from '../../services/notification.service';
+
 import { CardFormComponent } from '../card-form/card-form.component';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-card-list',
@@ -30,19 +27,15 @@ import { Location } from '@angular/common';
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',
 })
-export class CardListComponent implements OnInit {
+export class CardListComponent implements OnChanges {
   listId = input.required<string>();
   title = input<string>('');
   isMain = input<boolean>(false);
   list: ITask[] = [];
   readonly dialog = inject(MatDialog);
   private readonly taskService = inject(TaskService);
-  private readonly location = inject(Location);
-  private readonly listService = inject(ListService);
-  private readonly listStateService = inject(ListStateService);
-  private readonly notificationService = inject(NotificationService);
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.getCardList();
   }
 
@@ -57,16 +50,12 @@ export class CardListComponent implements OnInit {
   }
 
   addCard(): void {
-    debugger;
     const dialogRef = this.dialog.open(CardFormComponent, {
-      data: {
-        listId: this.listId(),
-        isMain: this.isMain(),
-      },
+      data: { list: this.listId() },
     });
+
     dialogRef.afterClosed().subscribe((result) => {
-      const { reload } = result;
-      if (reload) {
+      if (result?.reload) {
         this.getCardList();
       }
     });
