@@ -14,6 +14,7 @@
         formControlName="title"
         placeholder="Enter the title"
         class="w-full px-3 py-2 border border-gray-300 rounded-md"
+        data-cy="list-title-input"
       />
       <!-- <app-field-error-message
         [field]="form.controls.title"
@@ -34,6 +35,7 @@
         type="submit"
         class="!rounded-md"
         [disabled]="form.invalid"
+        data-cy="submit-list-button"
       >
         {{ isEditMode ? "Update List" : "Add List" }}
       </button>
