@@ -20,4 +20,41 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.scss',
 })
-export class ListPageComponent {}
+export class ListPageComponent {
+  listId = input.required<string>();
+  title = input<string>('');
+  isMain = input<boolean>(false);
+  list: IList[] = [];
+
+  readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
+  private readonly listService = inject(ListService);
+
+  ngOnInit(): void {
+    this.getLists();
+  }
+
+  getLists(): void {
+    this.listService.getAllLists().subscribe((resp) => {
+      console.log(resp);
+      this.list = resp;
+    });
+  }
+
+  viewCardList(cardId: string | null): void {
+    this.router.navigate(['/list', cardId]);
+  }
+
+  addCard(): void {
+    const dialogRef = this.dialog.open(CardFormComponent, {
+      data: {
+        listId: this.listId(),
+        isMain: this.isMain(),
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.reload) {
+      }
+    });
+  }
+}
