@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatButton } from '@angular/material/button';
-import { Component, Inject, inject, input } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IForm, ITask, FieldErrorMessageComponent, TaskService } from '@shared';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';

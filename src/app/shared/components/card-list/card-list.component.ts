@@ -1,4 +1,4 @@
-import { Component, inject, input, OnChanges, OnInit } from '@angular/core';
+import { Component, inject, input, OnChanges } from '@angular/core';
 import { ITask } from '../../models';
 import { CardItemComponent } from '../card-item/card-item.component';
 import {
