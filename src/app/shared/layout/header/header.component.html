@@ -5,8 +5,12 @@
   <div
     class="flex lg:gap-20 gap-6 items-center lg:px-12 pt-3 lg:text-lg text-base font-semibold cursor-pointer"
   >
-    <span [routerLink]="['../done/']">Done Tasks</span>
-    <span [routerLink]="['../main/']">Home</span>
-    <span [routerLink]="['../list/']"> Tasks List</span>
+    <span [routerLink]="['done/']" routerLinkActive="font-bold"
+      >Done Tasks</span
+    >
+    <span [routerLink]="['main']" routerLinkActive="font-bold">Home</span>
+    <span [routerLink]="['list']" routerLinkActive="font-bold">
+      Tasks List</span
+    >
   </div>
 </header>
