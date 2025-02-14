@@ -15,10 +15,19 @@
         </h3>
         @if(!list.isMain && list.title && list._id){
         <div class="flex items-center gap-2">
-          <button mat-icon-button (click)="editList(list.title, list._id)">
+          <button
+            mat-icon-button
+            (click)="editList(list.title, list._id)"
+            data-cy="edit-list-button"
+            [attr.data-title]="list.title"
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteList(list._id)">
+          <button
+            mat-icon-button
+            (click)="deleteList(list._id)"
+            data-cy="delete-list-button"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
