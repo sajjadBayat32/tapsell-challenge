@@ -4,17 +4,34 @@
   >
     @for (list of lists; track $index) {
     <div
-      class="p-4 bg-gray-100 rounded-lg shadow cursor-pointer transition hover:bg-gray-200 flex flex-col gap-2 items-center justify-center"
-      (click)="viewCardList(list._id ?? null)"
+      class="p-4 bg-gray-100 rounded-lg shadow transition hover:bg-gray-200 flex flex-col gap-2 items-center justify-center h-40"
     >
-      <h3 class="text-md font-semibold text-gray-800">{{ list.title }}</h3>
+      <div class="flex items-center justify-between">
+        <h3
+          class="text-md font-semibold text-gray-800 cursor-pointer"
+          (click)="viewCardList(list._id ?? null)"
+        >
+          {{ list.title }}
+        </h3>
+        @if(!list.isMain && list.title && list._id){
+        <div class="flex items-center gap-2">
+          <button mat-icon-button (click)="editList(list.title, list._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteList(list._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+
       <p class="text-base text-gray-400">
-        Tap on card to see card list and tasks
+        Tap on card title to see card list and tasks
       </p>
     </div>
     }
     <div
-      class="flex flex-col items-center justify-center p-6 text-gray-500 bg-white/30 backdrop-blur-sm rounded-lg shadow"
+      class="flex flex-col items-center justify-center p-6 text-gray-500 bg-white/30 backdrop-blur-sm rounded-lg shadow h-40"
     >
       <p class="mt-2">Click below to add new list.</p>
       <button mat-button class="mt-3 px-4 py-2 !rounded-md" (click)="addList()">

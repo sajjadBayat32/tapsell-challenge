@@ -15,6 +15,7 @@ import { ListFormComponent } from '../list-form/list-form.component';
 import { ListStateService } from '../../services/list-state.service';
 import { NotificationService } from '../../services/notification.service';
 import { CardFormComponent } from '../card-form/card-form.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-card-list',
@@ -36,6 +37,7 @@ export class CardListComponent implements OnInit {
   list: ITask[] = [];
   readonly dialog = inject(MatDialog);
   private readonly taskService = inject(TaskService);
+  private readonly location = inject(Location);
   private readonly listService = inject(ListService);
   private readonly listStateService = inject(ListStateService);
   private readonly notificationService = inject(NotificationService);
@@ -55,6 +57,7 @@ export class CardListComponent implements OnInit {
   }
 
   addCard(): void {
+    debugger;
     const dialogRef = this.dialog.open(CardFormComponent, {
       data: {
         listId: this.listId(),
@@ -71,39 +74,5 @@ export class CardListComponent implements OnInit {
 
   onListUpdated(): void {
     this.getCardList();
-  }
-
-  editList(): void {
-    const dialogRef = this.dialog.open(ListFormComponent, {
-      data: { title: this.title(), listId: this.listId() },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      if (result?.reload) {
-        this.listStateService.setListState = true;
-      }
-    });
-  }
-
-  deleteList(): void {
-    if (confirm('Are you sure you want to delete this list?')) {
-      this.listService.deleteListById(this.listId()).subscribe({
-        next: (res) => {
-          if ('error' in res) {
-            this.notificationService.show(
-              'An error occurred. Please try again!',
-              'error'
-            );
-          } else {
-            this.notificationService.show(
-              'List Deleted successfully!',
-              'success'
-            );
-            this.listStateService.setListState = true;
-          }
-        },
-      });
-    }
   }
 }

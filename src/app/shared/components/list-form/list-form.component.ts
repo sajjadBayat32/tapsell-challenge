@@ -14,12 +14,13 @@ import {
 } from '@angular/material/dialog';
 import { IForm, FieldErrorMessageComponent, IList, ListService } from '@shared';
 import { NotificationService } from '../../services/notification.service';
+import { ListStateService } from '../../services/list-state.service';
 
 @Component({
   selector: 'app-list-form',
   imports: [
     ReactiveFormsModule,
-    FieldErrorMessageComponent,
+    // FieldErrorMessageComponent,
     MatButton,
     MatDialogModule,
   ],
@@ -33,6 +34,7 @@ export class ListFormComponent {
 
   private readonly listService = inject(ListService);
   private readonly notificationService = inject(NotificationService);
+  private readonly listStateService = inject(ListStateService);
   dialogRef = inject(MatDialogRef<ListFormComponent>);
 
   constructor(
@@ -73,6 +75,7 @@ export class ListFormComponent {
               'List added successfully!',
               'success'
             );
+            this.listStateService.setListState = true;
             this.dialogRef.close({ reload: true });
           }
         },

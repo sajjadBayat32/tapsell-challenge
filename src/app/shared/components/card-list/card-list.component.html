@@ -1,19 +1,7 @@
 <div class="p-4 bg-white rounded-xl shadow-md lg:w-[350px] w-[300px]">
-  <div class="flex items-center justify-between">
-    <h2 class="text-lg font-bold text-gray-800 mb-3 px-1.5">
-      {{ title() }}
-    </h2>
-    @if(!isMain()){
-    <div class="flex items-center gap-2">
-      <button mat-icon-button (click)="editList()">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button (click)="deleteList()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-    }
-  </div>
+  <h2 class="text-lg font-bold text-gray-800 mb-3 px-1.5 text-center">
+    {{ title() }}
+  </h2>
 
   @if(list.length > 0 ){
   <div

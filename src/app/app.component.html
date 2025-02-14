@@ -1,21 +1,6 @@
 <div class="min-h-screen mx-auto px-6 pt-10 overflow-auto max-w-[1400px]">
   <app-header></app-header>
-  <!-- <div class="flex gap-5">
-    @for (item of lists; track item._id) {
-    <app-card-list
-      [listId]="item._id ?? ''"
-      [title]="item.title ?? ''"
-    ></app-card-list>
-    }
-  </div> -->
-  <!-- <button
-      mat-button
-      class="!rounded-xl w-[150px] custom-blur-button flex items-center shrink-0"
-      (click)="addListForm()"
-    >
-      Add New List
-      <mat-icon>add</mat-icon>
-    </button> -->
+
   <div class="flex-1 flex items-center justify-center">
     <router-outlet></router-outlet>
   </div>
