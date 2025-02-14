@@ -25,10 +25,10 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'main',
-    pathMatch: 'full', // Ensures the default route goes to 'main'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'main', // Wildcard for unknown routes
+    redirectTo: 'main',
   },
 ];

@@ -18,7 +18,7 @@ import { NotificationService } from '../../services/notification.service';
   imports: [
     ReactiveFormsModule,
     MatDialogModule,
-    FieldErrorMessageComponent,
+    // FieldErrorMessageComponent,
     MatButton,
   ],
   templateUrl: './card-form.component.html',

@@ -1,6 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ListFormComponent } from './shared/components/list-form/list-form.component';
 import { IList, ListService } from '@shared';
@@ -16,6 +20,7 @@ import { HeaderComponent } from './shared/layout/header/header.component';
     MatIconModule,
     HeaderComponent,
   ],
+  providers: [{ provide: MatDialogRef, useValue: {} }],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

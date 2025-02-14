@@ -9,12 +9,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CardFormComponent } from '../card-form/card-form.component';
 import { ListService, TaskService } from '../../services';
 import { MatIconModule } from '@angular/material/icon';
 import { ListFormComponent } from '../list-form/list-form.component';
 import { ListStateService } from '../../services/list-state.service';
 import { NotificationService } from '../../services/notification.service';
+import { CardFormComponent } from '../card-form/card-form.component';
 
 @Component({
   selector: 'app-card-list',
