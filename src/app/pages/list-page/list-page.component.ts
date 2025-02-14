@@ -1,15 +1,9 @@
 import { Component, inject, input } from '@angular/core';
 
 import { Router } from '@angular/router';
-import {
-  CardFormComponent,
-  IList,
-  ITask,
-  ListService,
-  TaskService,
-} from '@shared';
+import { IList, ListService } from '@shared';
 import { ListStateService } from '../../shared/services/list-state.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { ListFormComponent } from '../../shared/components/list-form/list-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -29,6 +23,7 @@ export class ListPageComponent {
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
   private readonly listService = inject(ListService);
+  private readonly listStateService = inject(ListStateService);
 
   ngOnInit(): void {
     this.getLists();
@@ -36,7 +31,6 @@ export class ListPageComponent {
 
   getLists(): void {
     this.listService.getAllLists().subscribe((resp) => {
-      console.log(resp);
       this.list = resp;
     });
   }
@@ -45,15 +39,12 @@ export class ListPageComponent {
     this.router.navigate(['/list', cardId]);
   }
 
-  addCard(): void {
-    const dialogRef = this.dialog.open(CardFormComponent, {
-      data: {
-        listId: this.listId(),
-        isMain: this.isMain(),
-      },
-    });
+  addList(): void {
+    const dialogRef = this.dialog.open(ListFormComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      if (result?.reload) {
+      const { reload } = result;
+      if (reload) {
+        this.listStateService.setListState = true;
       }
     });
   }
