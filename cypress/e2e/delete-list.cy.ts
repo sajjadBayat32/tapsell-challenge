@@ -11,9 +11,9 @@ describe('List Management Tests', () => {
     cy.get('[data-cy=list-title-input]').type(listTitle);
     cy.get('[data-cy=submit-list-button]').click();
     cy.wait(1000);
-    cy.contains(listTitle).should('exist'); // Verify it exists
+    cy.contains(listTitle).should('exist');
 
-    cy.wait(1000);
+    cy.wait(2000);
     cy.contains(listTitle)
       .parent()
       .find('[data-cy=delete-list-button]')

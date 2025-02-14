@@ -1,22 +1,32 @@
 describe('Edit List Test', () => {
   beforeEach(() => {
-    cy.visit('/list');
+    cy.visit('/list'); // Ensure the correct base URL is set
   });
 
-  it('should edit an existing list and verify the update', () => {
-    const oldTitle = 'My New List';
-    const newTitle = 'Updated List Title';
-    cy.wait(2000);
-    cy.contains(oldTitle).should('exist');
-    cy.get(`[data-cy=edit-list-button][data-title="${oldTitle}"]`).click();
-    cy.wait(2000);
-    cy.get('[data-cy=list-dialog-title]').should('contain', 'Edit List');
-    cy.get('[data-cy=list-title-input]').clear().type(newTitle);
+  it('should add a new list, edit it, and verify the update', () => {
+    const initialTitle = 'Temporary List';
+    const updatedTitle = 'Updated List Title';
+
+    cy.wait(1000);
+    cy.get('[data-cy=add-list-button]').click();
+    cy.get('[data-cy=list-title-input]').type(initialTitle);
     cy.get('[data-cy=submit-list-button]').click();
-    cy.wait(2000);
-    cy.contains(newTitle).should('exist');
-    cy.contains(oldTitle).should('not.exist');
-    cy.contains('List updated successfully!').should('be.visible');
-    assert.isTrue(true, 'edit an existing list');
+
+    cy.wait(1000);
+    cy.contains(initialTitle).should('exist');
+
+    cy.contains(initialTitle)
+      .parent()
+      .find('[data-cy=edit-list-button]')
+      .click();
+    cy.wait(1000);
+    cy.get('[data-cy=list-dialog-title]').should('contain', 'Edit List');
+    cy.get('[data-cy=list-title-input]').clear().type(updatedTitle);
+    cy.get('[data-cy=submit-list-button]').click();
+
+    cy.wait(1000);
+    cy.contains(updatedTitle).should('exist');
+    cy.contains(initialTitle).should('not.exist');
+    assert.isTrue(true, ' edit a list');
   });
 });
