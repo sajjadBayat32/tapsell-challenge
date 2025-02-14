@@ -1,0 +1,22 @@
+<mat-card class="card rounded-lg cursor-pointer px-4 py-2">
+  <mat-card-header class="!p-2">
+    <mat-card-title class="!text-lg">
+      {{ data().title }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ data().description }}</p>
+    {{ data().date | date : "MM-dd-YYYY" }}
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div class="flex gap-2 justify-end">
+      <button mat-button (click)="editCard()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button (click)="deleteCard(data()._id || '')">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>
