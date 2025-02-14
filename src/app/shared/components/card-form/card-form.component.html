@@ -55,6 +55,7 @@
         type="submit"
         class="!rounded-md"
         [disabled]="form.invalid"
+        data-cy="card-submit-button"
       >
         {{ taskId ? "Update" : "Add" }} Task
       </button>

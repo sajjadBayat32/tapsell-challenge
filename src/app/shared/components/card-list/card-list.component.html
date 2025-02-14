@@ -22,7 +22,12 @@
   </div>
   }
 
-  <button mat-button class="mt-3 w-full !rounded-md" (click)="addCard()">
+  <button
+    mat-button
+    class="mt-3 w-full !rounded-md"
+    (click)="addCard()"
+    data-cy="add-card-button"
+  >
     <mat-icon>add</mat-icon>
     Add New Card
   </button>
