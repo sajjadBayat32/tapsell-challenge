@@ -25,6 +25,7 @@ import { NotificationService } from '../../services/notification.service';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
+  editable = input<boolean>(true);
   data = input.required<ITask>();
   @Output() listUpdated = new EventEmitter<ITask[]>();
   private readonly notificationService = inject(NotificationService);

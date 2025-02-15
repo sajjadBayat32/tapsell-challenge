@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-2 w-100">
   @for (task of completedTasks; track $index) {
-  <app-card-item [data]="task"></app-card-item>
+  <app-card-item [data]="task" [editable]="false"></app-card-item>
   }
 </div>
