@@ -3,7 +3,7 @@
     <mat-card-title class="!text-lg !w-full">
       <div class="flex justify-between items-center">
         <div class="flex gap-1">
-          <span class="font-medium" data-cy="card-title-input">Title:</span>
+          <span class="font-medium">Title:</span>
           {{ data().title }}
         </div>
 
@@ -30,10 +30,14 @@
 
   <mat-card-footer>
     <div class="flex gap-2 justify-end">
-      <button mat-button (click)="editCard()">
+      <button mat-button (click)="editCard()" data-cy="card-edit-button">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-button (click)="deleteCard(data()._id || '')">
+      <button
+        mat-button
+        (click)="deleteCard(data()._id || '')"
+        data-cy="card-delete-button"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>
