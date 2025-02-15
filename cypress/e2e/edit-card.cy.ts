@@ -35,7 +35,9 @@ describe('Add and Edit Card', () => {
       .clear()
       .type(updatedDescription);
 
-    cy.get('button[type="submit"]').contains('Update Task').click();
+    cy.get('button[type="submit"]')
+      .contains('Update Task')
+      .click({ multiple: true });
 
     cy.get('mat-card').within(() => {
       cy.contains(updatedTitle).should('exist');

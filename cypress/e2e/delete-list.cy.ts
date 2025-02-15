@@ -16,6 +16,7 @@ describe('List Management Tests', () => {
     cy.wait(2000);
     cy.contains(listTitle)
       .parent()
+      .parent()
       .find('[data-cy=delete-list-button]')
       .click();
 

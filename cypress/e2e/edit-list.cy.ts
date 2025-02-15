@@ -1,6 +1,6 @@
 describe('Edit List Test', () => {
   beforeEach(() => {
-    cy.visit('/list'); // Ensure the correct base URL is set
+    cy.visit('/list');
   });
 
   it('should add a new list, edit it, and verify the update', () => {
@@ -16,6 +16,7 @@ describe('Edit List Test', () => {
     cy.contains(initialTitle).should('exist');
 
     cy.contains(initialTitle)
+      .parent()
       .parent()
       .find('[data-cy=edit-list-button]')
       .click();
