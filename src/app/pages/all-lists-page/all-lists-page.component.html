@@ -4,50 +4,53 @@
   >
     @for (list of lists; track $index) {
     <div
-      class="p-4 bg-gray-100 rounded-lg shadow transition hover:bg-gray-200 flex flex-col gap-2 items-center justify-center h-40"
+      class="p-4 bg-gray-50 rounded-lg shadow transition justify-center hover:bg-gray-100 flex flex-col gap-4 h-40 w-full"
     >
-      <div class="flex items-center justify-between">
-        <h3
-          class="text-md font-semibold text-gray-800 cursor-pointer"
+      <div class="flex flex-col gap-8">
+        <div
+          class="py-4 cursor-pointer border rounded-lg px-1"
           data-cy="list-title"
           (click)="viewCardList(list._id ?? null)"
         >
-          {{ list.title }}
-        </h3>
+          <h3
+            class="text-md text-gray-800 w-full overflow-hidden whitespace-nowrap text-ellipsis text-center text-[20px] font-bold border-gray-300"
+          >
+            {{ list.title }}
+          </h3>
+        </div>
         @if(!list.isMain && list.title && list._id){
-        <div class="flex items-center gap-2">
+        <div class="flex w-full items-center justify-between gap-2">
           <button
-            mat-icon-button
+            mat-flat-button
+            class="!rounded-md"
             (click)="editList(list.title, list._id)"
             data-cy="edit-list-button"
             [attr.data-title]="list.title"
           >
+            Edit
             <mat-icon>edit</mat-icon>
           </button>
           <button
-            mat-icon-button
+            mat-flat-button
+            class="!rounded-md"
             (click)="deleteList(list._id)"
             data-cy="delete-list-button"
           >
+            Delete
             <mat-icon>delete</mat-icon>
           </button>
         </div>
         }
       </div>
-
-      <p class="text-base text-gray-400">
-        Tap on card title to see card list and tasks
-      </p>
     </div>
     }
     <div
-      class="flex flex-col items-center justify-center p-6 text-gray-500 bg-white/30 backdrop-blur-sm rounded-lg shadow h-40"
+      class="flex flex-col cursor-pointer items-center justify-center p-6 text-gray-500 bg-white/30 backdrop-blur-sm rounded-lg shadow h-40"
+      (click)="addList()"
     >
-      <p class="mt-2">Click below to add new list.</p>
       <button
         mat-button
-        class="mt-3 px-4 py-2 !rounded-md"
-        (click)="addList()"
+        class="px-4 py-2 !rounded-md"
         data-cy="add-list-button"
       >
         <mat-icon>add</mat-icon> Add New List

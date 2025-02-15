@@ -3,24 +3,27 @@
 >
   <h1 class="text-xl font-bold">To Do List</h1>
   <div
-    class="flex lg:gap-20 gap-6 items-center lg:px-12 pt-3 lg:text-lg text-base font-semibold cursor-pointer"
+    class="flex lg:gap-16 gap-6 items-center lg:px-12 pt-3 lg:text-lg text-base font-semibold cursor-pointer"
   >
     <span
       data-cy="nav-done-tasks"
+      class="tab-text"
       [routerLink]="['done']"
-      routerLinkActive="font-bold"
+      routerLinkActive="active-tab"
       >Done Tasks</span
     >
     <span
       data-cy="nav-home"
+      class="tab-text"
       [routerLink]="['main']"
-      routerLinkActive="font-bold"
+      routerLinkActive="active-tab"
       >Home</span
     >
     <span
       data-cy="nav-task-list"
+      class="tab-text"
       [routerLink]="['list']"
-      routerLinkActive="font-bold"
+      routerLinkActive="active-tab"
     >
       Tasks List</span
     >
